@@ -50,7 +50,7 @@ venue: arXiv preprint
 
 根本原因：这些方法要么无法压缩上下文，要么压缩后的信息仍存在于输入序列中，无法被"吸收"进模型权重。
 
-![[lora-gen/images/fig_paradigm_comparison.png]]
+![lora-gen/images/fig_paradigm_comparison.png](lora-gen/images/fig_paradigm_comparison.png)
 *图：三种 LoRA 微调范式对比——(a) Vanilla LoRA 逐任务训练，(b) LoRA-MoE 引入 token-wise 路由但增加推理开销，(c) LoRA-Gen 由云端大模型一次前向生成任务专属 LoRA 参数*
 
 ### LoRA-Gen 的关键洞察
@@ -61,7 +61,7 @@ venue: arXiv preprint
 
 ### 整体架构
 
-![[lora-gen/images/fig_architecture.png]]
+![lora-gen/images/fig_architecture.png](lora-gen/images/fig_architecture.png)
 *图：LoRA-Gen 整体架构——(a) 云端 LoRA 生成器：system prompt 经大模型编码后产生 meta token，通过路由模块从专家池中组合 LoRA 参数；(b) 边缘端特化模型：生成的 LoRA 参数重参数化合并进 FFN 层，推理时零额外开销*
 
 框架分两阶段运行：
@@ -130,7 +130,7 @@ $$\theta^i = \sum_{j=1}^{n} G^i \cdot E_j$$
 
 ### 推理任务：准确率与延迟双赢
 
-![[lora-gen/images/fig_accuracy_latency.png]]
+![lora-gen/images/fig_accuracy_latency.png](lora-gen/images/fig_accuracy_latency.png)
 *图：准确率-延迟散点图——LoRA-Gen（红色）在所有 shot 设置下均位于帕累托前沿左上方，兼顾高准确率与低延迟；MixLoRA（黄绿色）因 token-wise 路由延迟显著增大*
 
 在 8 个推理 benchmark（ARC、BoolQ、HellaSwag 等）上的 5-shot 评估：
@@ -144,12 +144,12 @@ $$\theta^i = \sum_{j=1}^{n} G^i \cdot E_j$$
 
 LoRA-Gen 在三个边缘模型上均取得最优准确率，同时延迟降低 2.1x-2.4x。MixLoRA 因 token-wise 路由反而比 vanilla 更慢。
 
-![[lora-gen/images/fig_main_results.png]]
+![lora-gen/images/fig_main_results.png](lora-gen/images/fig_main_results.png)
 *图：完整实验结果——Table 2 展示三个边缘模型在 8 个推理 benchmark 上的详细得分与延迟；Table 3 展示 Gemma-2B 在 GPT4Tools agent 任务上的对比，LoRA-Gen 实现 10.1x 上下文压缩*
 
 ### Agent 任务：10.1x 上下文压缩
 
-![[lora-gen/images/fig_agent_visualization.png]]
+![lora-gen/images/fig_agent_visualization.png](lora-gen/images/fig_agent_visualization.png)
 *图：Agent 场景可视化对比——左侧为 LoRA-Gen 特化后的边缘模型（无需工具定义即可正确调用工具），右侧为基线 Gemma-2B（需要完整工具定义占用大量上下文），LoRA-Gen 显著缩短处理时间*
 
 GPT4Tools benchmark（Gemma-2B）：

@@ -57,7 +57,7 @@ IGPG 将"生成神经网络权重"建模为一个序列生成问题：先用 Gum
 
 ### 整体流程
 
-![[igpg/images/fig_framework.png]]
+![igpg/images/fig_framework.png](igpg/images/fig_framework.png)
 *图：IGPG 整体框架——VQ-VAE 将权重 tokenize 为离散序列，GPT-2 基于任务和架构条件自回归生成 token，解码器还原为可用权重*
 
 ```
@@ -162,10 +162,10 @@ IGPG 在平均准确率上超过 FourierFT 5.7 个百分点，在 DTD（+13.7）
 
 在 CIFAR-10 上，IGPG 生成的模型准确率（93.74%）与预训练模型（93.76%）几乎一致。生成准确率与预训练准确率的 Pearson 相关系数达到 0.9999（CIFAR-10）和 0.9991（CIFAR-100），说明 IGPG 忠实再现了不同架构的性能梯度。
 
-![[igpg/images/fig_param_distribution.png]]
+![igpg/images/fig_param_distribution.png](igpg/images/fig_param_distribution.png)
 *图：19 种架构在 CIFAR-10/CIFAR-100 上的参数量分布（0.27M-27M），展示 IGPG 支持的架构多样性*
 
-![[igpg/images/fig_correlation.png]]
+![igpg/images/fig_correlation.png](igpg/images/fig_correlation.png)
 *图：IGPG 生成权重的准确率与预训练准确率的相关性——CIFAR-10（r=1.00）和 CIFAR-100（r=1.00），回归线几乎与 y=x 重合*
 
 ### 跨架构泛化
@@ -174,14 +174,14 @@ IGPG 在平均准确率上超过 FourierFT 5.7 个百分点，在 DTD（+13.7）
 - 分布内架构：与预训练 baseline 持平
 - 分布外架构（ResNet-20、ResNet-110）：超越所有 baseline，但绝对准确率仍远低于预训练水平（约 46%）
 
-![[igpg/images/fig_cross_arch.png]]
+![igpg/images/fig_cross_arch.png](igpg/images/fig_cross_arch.png)
 *图：IGPG 在已见（ResNet-32/44）与未见（ResNet-20/56/110）架构上的 CIFAR-10 准确率对比，分布内架构接近预训练水平*
 
 ### 迁移学习
 
 单个 IGPG 模型在 30 个 Meta-Album 数据集上训练后，在未见的 CIFAR-10 和 Oxford Pets 上，生成的模型在 1 个 epoch 内即实现超过 50% 的相对提升，展现快速适应能力。
 
-![[igpg/images/fig_transfer_learning.png]]
+![igpg/images/fig_transfer_learning.png](igpg/images/fig_transfer_learning.png)
 *图：迁移学习评估——IGPG 生成的权重在 CIFAR10/CIFAR100/PETS10/AIRCRAFT30 上仅 1 epoch 微调即大幅超越随机初始化*
 
 ### 分布学习保真度
